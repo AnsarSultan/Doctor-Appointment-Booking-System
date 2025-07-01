@@ -1,12 +1,15 @@
 import React from 'react';
 import Header from '../components/Header';
+import SpecialityMenu from '../components/SpecialityMenu';
+import TopDoctors from '../components/TopDoctors';
 
 
 export default function Home(){
     return(
         <div>
             <Header/>
-            Home page
+           <SpecialityMenu/>
+           <TopDoctors/>
         </div>
     )
 }
