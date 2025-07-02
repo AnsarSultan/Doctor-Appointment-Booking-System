@@ -13,7 +13,7 @@ export default function SpecialityMenu() {
         Simply browse through our extensive list of trusted doctors, schedule
         your appointment hassle-free.
       </p>
-      <div className=" flex sm:justify-center gap-4 pt-5 w-full overflow-scroll ">
+      <div className="flex sm:justify-center gap-4 pt-5 w-full overflow-x-scroll no-scrollbar">
         {specialityData.map((item, index) => (
           <Link
           onClick={()=>scrollTo(0,0)}
