@@ -45,7 +45,7 @@ const addDoctor = async (req , res)=>{
         res.json({success:true , message: "Doctor added"})
 
 
-        res.send("data stored successfully")
+        res.send("Data stored successfully")
     } catch (error) {
         console.log(error)
         res.json({success:false, message: error.message})
