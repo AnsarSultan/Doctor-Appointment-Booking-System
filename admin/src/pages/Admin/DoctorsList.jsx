@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { AdminContext } from '../../context/AdminContext'
 
 function DoctorsList() {
-  const {doctors , aToken , getAllDoctors} = useContext(AdminContext)
+  const {doctors , aToken , getAllDoctors , loadingDoctors} = useContext(AdminContext)
   useEffect(()=>{
     if(aToken){
       getAllDoctors()
@@ -13,6 +13,7 @@ function DoctorsList() {
       <h1 className='text-lg font-medium'>All Doctors</h1>
       <div className='w-full flex justify-center flex-wrap gap-4 pt-5 gap-y-6'>
         {
+          loadingDoctors ? <p>Loading Doctors...</p> :
           doctors.map((item , index)=>(
             <div className='border border-indigo-200 rounded-xl max-w-50 overflow-hidden cursor-pointer group' key={index}>
               <img className='bg-indigo-50 group-hover:bg-indigo-500 transition-all duration-500' src={item.image} alt="" />
