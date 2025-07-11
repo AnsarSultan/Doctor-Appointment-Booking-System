@@ -6,7 +6,6 @@ const changeAvailablity = async (req, res) => {
     try {
       const { docId } = req.body;
   
-      // ✅ Validate ObjectId
       if (!mongoose.Types.ObjectId.isValid(docId)) {
         return res.json({ success: false, message: "Invalid doctor ID" });
       }
