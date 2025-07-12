@@ -78,7 +78,6 @@ export default function Appointments () {
           minute: '2-digit',
         });
   
-        // ✅ FILTER: Only include time if it's not booked
         let day = currentDate.getDate();
         let month = currentDate.getMonth() + 1;
         let year = currentDate.getFullYear();
