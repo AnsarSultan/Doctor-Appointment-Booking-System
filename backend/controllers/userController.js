@@ -198,4 +198,5 @@ const cancelAppointment = async (req, res)=>{
 }
 
 
+
 export { registerUser, loginUser, getProfile, updateProfile, bookAppointment , listAppointment , cancelAppointment};
