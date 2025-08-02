@@ -36,7 +36,7 @@ function AddDoctor() {
       formData.append('about',about)
       formData.append('speciality',speciality)
       formData.append('degree',degree)
-      formData.append('address', JSON.stringify({Line1: address1 ,line2:address2}))
+      formData.append('address', JSON.stringify({line1: address1 ,line2:address2}))
 
       // formData.forEach((value , key )=>{
       //     console.log(`${key} : ${value}`)
