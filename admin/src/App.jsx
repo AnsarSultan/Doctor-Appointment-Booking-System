@@ -13,6 +13,9 @@ import { DoctorContext } from './context/DoctorContext';
 import DoctorDashboard from './pages/Doctor/DoctorDashboard';
 import DoctorAppointment from './pages/Doctor/DoctorAppointment';
 import DoctorProfile from './pages/Doctor/DoctorProfile';
+import RedirectToDashboard from './routing/RedirectToDashboard';
+import ProtectedAdminRoute from './routing/ProtectedAdminRoute';
+import ProtectedDoctorRoute from './routing/ProtectedDoctorRoute';
 
 export default function App() {
   const {aToken} = useContext(AdminContext)
@@ -25,15 +28,20 @@ export default function App() {
         <Sidebar/>
         <Routes>
           {/* admin routes */}
-          <Route path='/' element={<></>}/>
+          <Route path='/' element={<RedirectToDashboard/>}/>
+          <Route element={<ProtectedAdminRoute />}>
           <Route path='/admin-dashboard' element={<Dashboard/>}/>
           <Route path='/all-appointments' element={<AllAppointments/>}/>
           <Route path='/add-doctor' element={<AddDoctor/>}/>
           <Route path='/doctor-list' element={<DoctorsList/>}/>
+          </Route>
+          
           {/* doctor route */}
+          <Route element={<ProtectedDoctorRoute/>}>
           <Route path='/doctor-dashboard' element={<DoctorDashboard/>}/>
           <Route path='/doctor-appointments' element={<DoctorAppointment/>}/>
           <Route path='/doctor-profile' element={<DoctorProfile/>}/>
+          </Route>
         </Routes>
       </div>
     </div>

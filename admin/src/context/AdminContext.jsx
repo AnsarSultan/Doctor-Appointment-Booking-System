@@ -44,6 +44,7 @@ const AdminContextProvider = (props)=>{
 
     const getAllAppointments = async ()=>{
         try {
+            setLoadingDoctors(true)
            const {data} = await axios.get(backendURL + '/api/admin/appointments', {headers:{aToken}})
            if(data.success){
             setAppointments(data.appointments)
@@ -52,7 +53,9 @@ const AdminContextProvider = (props)=>{
            }
         } catch (error) {
             toast.error(error.message)
-        }
+        }finally {
+            setLoadingDoctors(false);
+          }
     } 
 
     const cancelAppointment = async (appointmentId)=>{
@@ -71,14 +74,17 @@ const AdminContextProvider = (props)=>{
 
     const getDashData = async () =>{
         try {
+            setLoadingDoctors(true)
             const {data} = await axios.get(backendURL+'/api/admin/dashboard' , {headers:{aToken}})
             if(data.success){
                 setDashData(data.dashData)
             }else{
                 toast.error(data.message)
             }
+            setLoadingDoctors(false);
         } catch (error) {
             toast.error(error.message)
+            setLoadingDoctors(false);
         }
     }
 

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { AdminContext } from '../../context/AdminContext'
+import {MoonLoader} from 'react-spinners'
 
 function DoctorsList() {
   const {doctors , aToken , getAllDoctors , loadingDoctors , changeAvailablity} = useContext(AdminContext)
@@ -8,12 +9,19 @@ function DoctorsList() {
       getAllDoctors()
     }
   },[aToken])
+  if (loadingDoctors) {
+    return (
+      <div className="flex justify-center items-center h-screen w-full">
+        <MoonLoader color="#3F00FF" size={50} />
+      </div>
+    );
+  }
   return (
     <div className='m-5 max-h-[90vh] overflow-y-scroll'>
       <h1 className='text-lg font-medium'>All Doctors</h1>
       <div className='w-full flex justify-center flex-wrap gap-4 pt-5 gap-y-6'>
         {
-          loadingDoctors ? <p>Loading Doctors...</p> :
+         
           doctors.map((item , index)=>(
             <div className='border border-indigo-200 rounded-xl max-w-50 overflow-hidden cursor-pointer group' key={index}>
               <img className='bg-indigo-50 group-hover:bg-indigo-500 transition-all duration-500' src={item.image} alt="" />

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { assets } from "../../assets/assets";
+import {MoonLoader} from 'react-spinners'
 
 function Dashboard() {
-  const { aToken, getDashData, cancelAppointment, dashData } =
+  const { aToken, getDashData, cancelAppointment, dashData , loadingDoctors } =
     useContext(AdminContext);
 
   useEffect(() => {
@@ -12,8 +13,15 @@ function Dashboard() {
     }
   }, aToken);
 
+  if (loadingDoctors) {
+    return (
+      <div className="flex justify-center items-center h-screen w-full">
+        <MoonLoader color="#3F00FF" size={50} />
+      </div>
+    );
+  }
   return (
-    dashData && (
+    dashData ? (
       <div className="m-5">
         <div className="flex flex-wrap gap-3">
           <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer hover:scale-105 transition-all">
@@ -67,8 +75,8 @@ function Dashboard() {
          </div>
         </div>
       </div>
-    )
-  );
+    ) : <p className="m-5">Loading...</p>
+  ) ;
 }
 
 export default Dashboard;

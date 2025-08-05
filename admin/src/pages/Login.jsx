@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import {assets} from '../assets/assets.js'
 import { AdminContext } from '../context/AdminContext.jsx'
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -19,6 +18,7 @@ export default function Login() {
         if(data.success){
           localStorage.setItem('aToken', data.token)
           setAToken(data.token)
+          localStorage.removeItem('dToken')
         }else{
           toast.error(data.message)
         }
@@ -27,6 +27,7 @@ export default function Login() {
         if(data.success){
           localStorage.setItem('dToken', data.token)
           setDtoken(data.token)
+          localStorage.removeItem('aToken')
         }else{
           toast.error(data.message)
         }

@@ -2,17 +2,26 @@ import React, { useContext, useEffect } from "react";
 import { DoctorContext } from "../../context/DoctorContext";
 import { AppContext } from "../../context/AppContext";
 import { assets } from "../../assets/assets";
+import {MoonLoader} from 'react-spinners'
+
 function DoctorDashboard() {
-  const { dToken, dashData , getDashData , completeAppointment, cancelAppointment, } = useContext(DoctorContext);
+  const { dToken, dashData , getDashData , completeAppointment, cancelAppointment, loading } = useContext(DoctorContext);
   const {currency} = useContext(AppContext)
   useEffect(()=>{
     if(dToken){
       getDashData()
     }
   },[dToken])
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen w-full">
+        <MoonLoader color="#3F00FF" size={50} />
+      </div>
+    );
+  }
   return dashData && (
-  <div className="m-5">
-     <div className="flex flex-wrap gap-3">
+  <div className="m-5 ">
+     <div className="flex flex-wrap gap-3 ">
           <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer hover:scale-105 transition-all">
             <img className="w-14" src={assets.earning_icon} alt="" />
             <div>
@@ -41,12 +50,12 @@ function DoctorDashboard() {
             </div>
           </div>
         </div>
-         <div className="bg-white">
+         <div className="bg-white ">
           <div className="flex items-center gap-2.5 px-4 py-4 mt-10 rounded-t border">
             <img src={assets.list_icon} alt="" />
             <p className="font-semibold">Latest Bookings</p>
           </div>
-         <div className="pt-4 border border-t-0">
+         <div className="pt-4 border border-t-0 max-h-[50vh] min-h-[30vh] overflow-y-scroll">
           {
             dashData.latestAppointments.map((item , index)=>(
               <div className="flex items-center px-6 py-3 gap-3 hover:bg-gray-100" key={index}>

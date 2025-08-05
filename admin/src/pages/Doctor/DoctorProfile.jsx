@@ -3,9 +3,10 @@ import { DoctorContext } from "../../context/DoctorContext";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {MoonLoader} from 'react-spinners'
 
 function DoctorProfile() {
-  const {dToken ,  profileData, setProfileData, getProfileData , backendUrl } = useContext(DoctorContext);
+  const {dToken ,  profileData, setProfileData, getProfileData , backendUrl , loading } = useContext(DoctorContext);
   const {currency } = useContext(AppContext);
   const [isEdit , setIsEdit] = useState(false) ;
   const updateProfile = async ()=>{
@@ -32,6 +33,14 @@ function DoctorProfile() {
         getProfileData()        
       }
     },dToken)
+
+    if (loading) {
+      return (
+        <div className="flex justify-center items-center h-screen w-full">
+          <MoonLoader color="#3F00FF" size={50} />
+        </div>
+      );
+    }
   return profileData && (
   <div>
     <div className="flex flex-col gap-4 m-5 max-h-[80vh] min-h-[50vh] overflow-y-scroll">

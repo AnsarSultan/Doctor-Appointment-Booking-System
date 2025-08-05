@@ -13,9 +13,11 @@ const DoctorContextProvider = (props) => {
   const [appointments, setAppointments] = useState([]);
   const [dashData, setdashData] = useState(false);
   const [profileData , setProfileData] = useState(false);
+  const [loading , setLoadingDoctors] = useState(false);
 
   const getAppointments = async () => {
     try {
+      setLoadingDoctors(true)
       const { data } = await axios.get(
         backendUrl + "/api/doctor/appointments",
         { headers: { dToken } }
@@ -28,6 +30,8 @@ const DoctorContextProvider = (props) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    }finally{
+      setLoadingDoctors(false)
     }
   };
   const completeAppointment = async (appointmentId) => {
@@ -71,6 +75,7 @@ const DoctorContextProvider = (props) => {
 
   const getDashData = async () => {
     try {
+      setLoadingDoctors(true)
       const { data } = await axios.get(backendUrl + "/api/doctor/dashboard", {
         headers: { dToken },
       });
@@ -82,11 +87,14 @@ const DoctorContextProvider = (props) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    }finally{
+      setLoadingDoctors(false)
     }
   };
 
   const getProfileData = async ()=>{
     try {
+      setLoadingDoctors(true)
         const {data} = await axios.get(backendUrl+'/api/doctor/profile', {headers:{dToken}})
         if (data.success) {
             setProfileData(data.profileData)            
@@ -94,6 +102,8 @@ const DoctorContextProvider = (props) => {
     } catch (error) {
         console.log(error);
         toast.error(error.message);
+    }finally{
+      setLoadingDoctors(false)
     }
   }
 
@@ -111,7 +121,8 @@ const DoctorContextProvider = (props) => {
     getDashData , 
     profileData,
     setProfileData,
-    getProfileData
+    getProfileData , 
+    loading
   };
   return (
     <DoctorContext.Provider value={value}>

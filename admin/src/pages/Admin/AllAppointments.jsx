@@ -2,15 +2,23 @@ import React, { useContext, useEffect } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { AppContext } from "../../context/AppContext";
 import { assets } from "../../assets/assets";
+import {MoonLoader} from 'react-spinners'
 
 function AllAppointments() {
-  const { aToken, appointments, getAllAppointments , cancelAppointment } = useContext(AdminContext);
+  const { aToken, appointments, getAllAppointments , cancelAppointment , loadingDoctors } = useContext(AdminContext);
   const {calculateAge , currency} = useContext(AppContext)
   useEffect(() => {
     if (aToken) {
       getAllAppointments();
     }
   }, [aToken]);
+  if (loadingDoctors) {
+    return (
+      <div className="flex justify-center items-center h-screen w-full">
+        <MoonLoader color="#3F00FF" size={50} />
+      </div>
+    );
+  }
   return (
     <div className="w-full max-w-6xl m-5">
       <p className="mb-3 text-lg font-medium">All Appointments</p>
